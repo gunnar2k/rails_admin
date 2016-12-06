@@ -240,8 +240,10 @@ $(document).on 'rails_admin.dom_ready', (e, content) ->
         options = $(@).data('options')
         config_options = $.parseJSON(options['config_options'])
         if config_options
-          config_options['imageUploadParams'].authenticity_token = $('meta[name=csrf-token]').attr('content');
-          config_options['imageManagerLoadParams'].authenticity_token = $('meta[name=csrf-token]').attr('content');
+          if config_options['imageUploadParams']
+            config_options['imageUploadParams'].authenticity_token = $('meta[name=csrf-token]').attr('content');
+          if config_options['imageManagerLoadParams']
+            config_options['imageManagerLoadParams'].authenticity_token = $('meta[name=csrf-token]').attr('content');
           if !config_options['toolbarInline']
             config_options['toolbarInline'] = false
         else
